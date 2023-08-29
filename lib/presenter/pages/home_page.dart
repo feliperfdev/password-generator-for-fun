@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: controller.input.text.isNotEmpty
+              onPressed: controller.input.text.trim().isNotEmpty
                   ? () {
                       setState(() {
                         controller.generate();
