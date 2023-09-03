@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:password_generator/core/constants.dart';
 import 'package:password_generator/presenter/pages/home_page.dart';
 
 class AppWidget extends StatelessWidget {
@@ -8,12 +9,16 @@ class AppWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      title: AppConstants.appName,
       theme: ThemeData(
         colorScheme: const ColorScheme.light(
           primary: Color.fromARGB(255, 159, 83, 172),
         ),
       ),
-      home: const HomePage(),
+      initialRoute: AppConstants.initialRoute,
+      routes: {
+        AppConstants.initialRoute: (context) => const HomePage(),
+      },
     );
   }
 }

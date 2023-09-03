@@ -7,6 +7,15 @@ extension _StringSplit on String {
 }
 
 class PasswordGenerator {
+  // Singleton
+  static final PasswordGenerator instance = PasswordGenerator._internal();
+
+  factory PasswordGenerator() {
+    return instance;
+  }
+
+  PasswordGenerator._internal();
+
   final _symbols = '!\$#@%&*()/-_=+\\';
   final _alphabet = 'abcdefghijklmnopqrstuvwxyz';
   final _includable = 'áãàâîçìíúùéèõóò';

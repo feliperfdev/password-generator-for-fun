@@ -1,19 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:password_generator/core/constants.dart';
 import 'package:password_generator/presenter/controllers/password_generator_controller.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+  const HomePage({
+    super.key,
+  });
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  final controller = PasswordGeneratorController();
+  late PasswordGeneratorController controller;
 
   @override
   void initState() {
+    controller = PasswordGeneratorController();
+
     controller.input.addListener(() {
       setState(() {
         if (controller.input.text.isEmpty) {
@@ -39,7 +44,7 @@ class _HomePageState extends State<HomePage> {
           children: [
             const Spacer(),
             const Text(
-              'Password Generator',
+              AppConstants.appName,
               style: TextStyle(
                 color: Color.fromARGB(255, 159, 83, 172),
                 fontSize: 30,
@@ -73,7 +78,7 @@ class _HomePageState extends State<HomePage> {
             ),
             const SizedBox(height: 30),
             ElevatedButton(
-              onPressed: controller.input.text.isNotEmpty
+              onPressed: controller.input.text.trim().isNotEmpty
                   ? () {
                       setState(() {
                         controller.generate();
@@ -100,7 +105,7 @@ class _HomePageState extends State<HomePage> {
             const Spacer(),
             GestureDetector(
               onTap: () async {
-                final uri = Uri.parse('https://github.com/feliperfdev');
+                final uri = Uri.parse(AppConstants.myGithub);
                 final canLaunch = await canLaunchUrl(uri);
                 if (canLaunch) {
                   await launchUrl(uri);
@@ -108,10 +113,10 @@ class _HomePageState extends State<HomePage> {
               },
               child: const Text.rich(
                 TextSpan(
-                  text: 'Desenvolvido para estudos e por diversão\n',
+                  text: 'Developed for studies and fun\n',
                   children: [
                     TextSpan(
-                        text: 'Por @feliperfdev',
+                        text: 'By ${AppConstants.myGithubNick}',
                         style: TextStyle(
                           decoration: TextDecoration.underline,
                         )),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:password_generator/core/constants.dart';
 import 'package:password_generator/core/password_generator.dart';
 
 class PasswordGeneratorController {
@@ -7,8 +8,9 @@ class PasswordGeneratorController {
 
   final input = TextEditingController();
 
-  void generate() {
-    final generator = PasswordGenerator();
+  void generate({bool isSingleton = false}) {
+    final generator =
+        isSingleton ? PasswordGenerator.instance : PasswordGenerator();
     generated = generator.generate(input.text);
   }
 
@@ -26,7 +28,7 @@ class PasswordGeneratorController {
         padding: EdgeInsets.symmetric(vertical: 8, horizontal: 12),
         backgroundColor: Colors.green,
         content: Text(
-          'Senha copiada para área de transferência com sucesso!',
+          AppConstants.clipboardMessage,
           style: TextStyle(
             color: Colors.white,
             fontSize: 16,
