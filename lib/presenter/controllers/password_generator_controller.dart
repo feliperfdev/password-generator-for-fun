@@ -8,9 +8,8 @@ class PasswordGeneratorController {
 
   final input = TextEditingController();
 
-  void generate({bool isSingleton = false}) {
-    final generator =
-        isSingleton ? PasswordGenerator.instance : PasswordGenerator();
+  void generate() {
+    final generator = PasswordGenerator();
     generated = generator.generate(input.text);
   }
 
